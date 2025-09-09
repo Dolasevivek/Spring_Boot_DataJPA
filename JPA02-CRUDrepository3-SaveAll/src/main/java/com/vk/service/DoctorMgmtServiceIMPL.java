@@ -24,6 +24,20 @@ public class DoctorMgmtServiceIMPL implements iDoctorMgmtService {
 	         
 		return "Doctor Obj is saved with id value ::"+idVal;
 	}
-
+//........................................................... Saving multiple Records ..........................................................................................................	
+	@Override
+	public String registerDoctorsGroup(Iterable<Doctor> list) {
 	
+		
+		System.out.println("DoctorMgmtServiceIMPL.registerDoctorsGroup()");
+		        Iterable<Doctor> savedAllDoctors = doctorRepo.saveAll(list);
+		        // preparing  list with id values
+		        List <Integer>ids=new ArrayList();
+		        savedAllDoctors.forEach(dr->{
+		        	ids.add(dr.getId());
+		        });		        
+		        // Returning the message
+		return  ids.size()+"No of Doctors are saved witi id values"+ids;
+	}
+
 }
